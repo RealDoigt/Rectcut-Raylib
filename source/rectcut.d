@@ -18,10 +18,10 @@ struct RectCut(T) if (isNumeric!(T))
     {
         switch(side)
         {
-            case Side.right: return rect.cutRight(a);
-            case Side.left:  return rect.cutLeft(a);
-            case Side.top:   return rect.cutTop(a);
-            default:         return rect.cutBottom(a);
+            case Side.right: return cutRight(a);
+            case Side.left:  return cutLeft(a);
+            case Side.top:   return cutTop(a);
+            default:         return cutBottom(a);
         }
     }
     
@@ -61,19 +61,19 @@ struct RectCut(T) if (isNumeric!(T))
     
     auto getRight(T a)
     {
-        newX = max(minX, maxX - a);
+        T newX = max(minX, maxX - a);
         return RectCut(newX, minY, maxX, maxY);
     }
     
     auto getTop(T a)
     {
-        newY = min(maxX, minY + a);
+        T newY = min(maxX, minY + a);
         return RectCut(minX, minY, maxX, newY);
     }
     
     auto getBottom(T a)
     {
-        newY = max(minY, maxY - a);
+        T newY = max(minY, maxY - a);
         return RectCut(minX, newY, maxX, maxY);
     }
     
