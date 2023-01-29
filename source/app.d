@@ -8,10 +8,11 @@ void main()
     SetTargetFPS(60);
     
     Rectangle[] testRects;
-    testRects ~= Rectangle(0, 0, 500, 500);
-    testRects ~= testRects[0].rectangleToRectcut.getTop(100f).rectcutToRectangle;
-    testRects ~= testRects[1].rectangleToRectcut.getLeft(50f).rectcutToRectangle;
-    
+    testRects ~= Rectangle(250, 0, 500, 500);
+    testRects ~= testRects[0].rectangleToRectcut.getTop(50f).rectcutToRectangle;
+    testRects ~= testRects[1].rectangleToRectcut.getRight(150f).rectcutToRectangle;
+    testRects ~= testRects[2].rectangleToRectcut.getRight(100f).rectcutToRectangle;
+    testRects ~= testRects[2].rectangleToRectcut.getRight(50f).rectcutToRectangle;
 
     while (!WindowShouldClose)
     {
