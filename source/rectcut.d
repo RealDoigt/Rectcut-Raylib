@@ -1,8 +1,9 @@
 module rectcut;
 import std.algorithm;
 import std.traits;
+import to_raylib_rect;
 
-struct RectCut(T) if (isNumeric!(T))
+struct RectCut
 {
     enum Side
     {
@@ -12,9 +13,9 @@ struct RectCut(T) if (isNumeric!(T))
         bottom
     }
 
-    T minX, minY, maxX, maxY;
+    float minX, minY, maxX, maxY;
     
-    auto cut(T a, Side side)
+    auto cut(float a, Side side)
     {
         switch(side)
         {
@@ -25,89 +26,89 @@ struct RectCut(T) if (isNumeric!(T))
         }
     }
     
-    auto cutLeft(T a)
+    auto cutLeft(float a)
     {
-        T originalX = minX;
+        float originalX = minX;
         minX = min(maxX, minX + a);
         return RectCut(originalX, minY, minX, maxY);
     }
     
-    auto cutRight(T a)
+    auto cutRight(float a)
     {
-        T originalX = maxX;
+        float originalX = maxX;
         maxX = max(minX, maxX - a);
         return RectCut(maxX, minY, originalX, maxY);
     }
     
-    auto cutTop(T a)
+    auto cutTop(float a)
     {
-        T originalY = minY;
+        float originalY = minY;
         minY = min(maxX, minY + a);
         return RectCut(minX, originalY, maxX, minY);
     }
     
-    auto cutBottom(T a)
+    auto cutBottom(float a)
     {
-        T originalY = maxY;
+        float originalY = maxY;
         maxY = max(minY, maxY - a);
         return RectCut(minX, maxY, maxX, originalY);
     }
     
-    auto getLeft(T a)
+    auto getLeft(float a)
     {
-        T newX = min(maxX, minX + a);
+        float newX = min(maxX, minX + a);
         return RectCut(minX, minY, newX, maxY);
     }
     
-    auto getRight(T a)
+    auto getRight(float a)
     {
-        T newX = max(minX, maxX - a);
+        float newX = max(minX, maxX - a);
         return RectCut(newX, minY, maxX, maxY);
     }
     
-    auto getTop(T a)
+    auto getTop(float a)
     {
-        T newY = min(maxX, minY + a);
+        float newY = min(maxX, minY + a);
         return RectCut(minX, minY, maxX, newY);
     }
     
-    auto getBottom(T a)
+    auto getBottom(float a)
     {
-        T newY = max(minY, maxY - a);
+        float newY = max(minY, maxY - a);
         return RectCut(minX, newY, maxX, maxY);
     }
     
-    auto addLeft(T a)
+    auto addLeft(float a)
     {
         return RectCut(minX - a, minY, maxX, maxY);
     }
     
-    auto addRight(T a)
+    auto addRight(float a)
     {
         return RectCut(minX, minY, maxX + a, maxY);
     }
     
-    auto addTop(T a)
+    auto addTop(float a)
     {
         return RectCut(minX, minY - a, maxX, maxY);
     }
     
-    auto addBottom(T a)
+    auto addBottom(float a)
     {
         return RectCut(minX, minY, maxX, maxY + a);
     }
     
-    auto extend(T a)
+    auto extend(float a)
     {
         return RectCut(minX - a, minY - a, maxX + a, maxY + a);
     }
     
-    auto contract(T a)
+    auto contract(float a)
     {
         return RectCut(minX + a, minY + a, maxX - a, maxY - a);
     }
     
-    void selfExtend(T a)
+    void selfExtend(float a)
     {
         minX -= a; 
         minY -= a; 
@@ -115,7 +116,7 @@ struct RectCut(T) if (isNumeric!(T))
         maxY += a;
     }
     
-    void selfcontract(T a)
+    void selfcontract(float a)
     {
         minX += a; 
         minY += a; 
