@@ -1,0 +1,7 @@
+name "rectcut-raylib"
+description "A raylib game"
+authors "doigt"
+license "proprietary"
+dependency "raylib-d" version="4.0.0"
+libs "raylib"
+lflags "-L./lib"
