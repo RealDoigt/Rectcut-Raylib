@@ -1,2 +1,5 @@
 lib 
 include
+*.o
+.dub/build/application-debug-linux.posix-x86_64-ldc_v1.28.0-F2F6B2D6F418E277DFCCDE75EE80B0CC/rectcut-raylib
+rectcut-raylib

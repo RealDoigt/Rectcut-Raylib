@@ -10,6 +10,6 @@ auto rectcutToRectangle(RectCut!float r)
 
 auto rectangleToRectcut(Rectangle r)
 {
-    auto maxX = r.x + width, maxY = r.height + r.y;
+    auto maxX = r.x + r.width, maxY = r.height + r.y;
     return RectCut!float(r.x, r.y, maxX, maxY);
 }
